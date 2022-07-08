@@ -13,6 +13,9 @@ script = ExtResource( 1 )
 [node name="Pivot" type="Spatial" parent="."]
 
 [node name="Character" type="CSGBox" parent="Pivot"]
+width = 1.9
+height = 1.9
+depth = 1.9
 material = SubResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
