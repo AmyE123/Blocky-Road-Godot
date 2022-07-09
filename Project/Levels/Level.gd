@@ -1,6 +1,6 @@
 extends Node
-enum Side {BLUE, RED}
-export var level_side = Side.BLUE
+enum Side {UP, DOWN}
+export var level_side = Side.UP
 export var rotate_toggle = false
 export var rotating = false
 
@@ -9,6 +9,7 @@ var completed_level = false
 export var num_completed_players = 0
 
 func _physics_process(delta):
+	
 	if(rotate_toggle):
 		_lerp_rotate_obj(z_rot, delta, $Pivot)
 	else:
@@ -22,7 +23,7 @@ func _physics_process(delta):
 func _input(event):
 	if(event.is_action_pressed("flip_map")):
 		rotate_toggle = !rotate_toggle
-		level_side = Side.RED if level_side == Side.BLUE else Side.BLUE
+		level_side = Side.DOWN if level_side == Side.UP else Side.UP
 
 func _lerp_rotate_obj(degree, delta, object):
 	object.rotation.z = lerp_angle($Pivot.rotation.z, deg2rad(degree), 20 * delta)
