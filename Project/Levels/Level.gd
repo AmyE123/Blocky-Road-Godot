@@ -1,17 +1,28 @@
 extends Node
 enum Side {BLUE, RED}
 export var level_side = Side.BLUE
+export var rotate_toggle = false
+export var rotating = false
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var z_rot = -180
+var completed_level = false
+export var num_completed_players = 0
 
+func _physics_process(delta):
+	if(rotate_toggle):
+		_lerp_rotate_obj(z_rot, delta, $Pivot)
+	else:
+		_lerp_rotate_obj(0, delta, $Pivot)
+	
+	if(num_completed_players == 2):
+		completed_level = true
+		if(completed_level):
+			print("WIN")
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func _input(event):
+	if(event.is_action_pressed("flip_map")):
+		rotate_toggle = !rotate_toggle
+		level_side = Side.RED if level_side == Side.BLUE else Side.BLUE
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _lerp_rotate_obj(degree, delta, object):
+	object.rotation.z = lerp_angle($Pivot.rotation.z, deg2rad(degree), 20 * delta)
