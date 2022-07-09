@@ -9,6 +9,7 @@ albedo_color = Color( 0.356863, 0.737255, 0.894118, 1 )
 
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 1 )
+player_color = Color( 0.356863, 0.737255, 0.894118, 1 )
 
 [node name="Pivot" type="Spatial" parent="."]
 
